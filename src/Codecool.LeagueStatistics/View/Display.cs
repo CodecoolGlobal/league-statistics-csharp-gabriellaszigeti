@@ -1,4 +1,5 @@
 using Codecool.LeagueStatistics.Model;
+using ConsoleTables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,8 @@ namespace Codecool.LeagueStatistics.View
         public static void PrintAllTeamsSorted(IEnumerable<Team> teams)
         {
             IEnumerable<Team> sortedTeams = Model.LeagueStatistics.GetAllTeamsSorted(teams);
-            foreach(var team in sortedTeams)
-            {
-                Console.WriteLine($"Teams name: {team.Name} , and their scores: {team.CurrentPoints()}, draws: {team.Draws}, looses: {team.Losts}, wins: {team.Wins}.");
-            }
+            PrintTable(sortedTeams);
+
         }
 
         public static void PrintTeamWithLongestName(IEnumerable<Team> teams)
@@ -24,6 +23,17 @@ namespace Codecool.LeagueStatistics.View
             Team team = Model.LeagueStatistics.GetTeamWithTheLongestName(teams);
                 Console.WriteLine($"Team with the longest name : {team.Name}");
             }
+
+        public static void PrintTable(IEnumerable<Team> teams)
+        {;
+            var table = new ConsoleTable("name", "points", "wins", "draws", "looses");
+            foreach(var team in teams)
+            {
+                table.AddRow(team.Name, team.CurrentPoints(), team.Wins, team.Draws, team.Losts);
+            }
+            Console.WriteLine(table);
         }
+
+    }
     }
 
