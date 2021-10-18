@@ -14,8 +14,8 @@ namespace Codecool.LeagueStatistics.Model
         /// </summary>
         /// <param name="teams"></param>
         /// <returns></returns>
-        public static IEnumerable<Team> GetAllTeamsSorted(this IEnumerable<Team> teams)
-            => throw new NotImplementedException();
+        public static IEnumerable<Team> GetAllTeamsSorted(this IEnumerable<Team> teams) => teams.OrderByDescending(team => team.CurrentPoints());
+
 
         /// <summary>
         ///     Gets all players from each team in one collection.
@@ -23,16 +23,15 @@ namespace Codecool.LeagueStatistics.Model
         /// <param name="teams"></param>
         /// <returns></returns>
         public static IEnumerable<Player> GetAllPlayers(this IEnumerable<Team> teams)
-            => throw new NotImplementedException();
+                        => throw new NotImplementedException();
 
         /// <summary>
         ///     Gets team with the longest name
         /// </summary>
+        /// 
         /// <param name="teams"></param>
         /// <returns></returns>
-        public static Team GetTeamWithTheLongestName(this IEnumerable<Team> teams)
-            => throw new NotImplementedException();
-
+        public static Team GetTeamWithTheLongestName(this IEnumerable<Team> teams) => teams.OrderByDescending(team => team.Name.Length).FirstOrDefault();
         /// <summary>
         ///     Gets top teams with least number of lost matches.
         ///     If the amount of lost matches is equal, next deciding parameter is team's current points value.
