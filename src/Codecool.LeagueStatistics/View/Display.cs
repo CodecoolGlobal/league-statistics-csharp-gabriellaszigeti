@@ -72,6 +72,15 @@ namespace Codecool.LeagueStatistics.View
             }
 
         }
+        
+        public static void PrintMostSuccessfullPlayerFromGivenDivision(IEnumerable<Team> teams, Division division)
+        {
+            Player mostSuccessfullPlayer = Model.LeagueStatistics.GetMostTalentedPlayerInDivision(teams, division);
+
+                Console.WriteLine($"Name of player: {mostSuccessfullPlayer.Name}, skillrate: {mostSuccessfullPlayer.SkillRate}");
+
+
+        }
 
 
     }
