@@ -34,6 +34,46 @@ namespace Codecool.LeagueStatistics.View
             Console.WriteLine(table);
         }
 
+        public static void PrintAllPlayers(IEnumerable<Team> teams)
+        {
+            IEnumerable<Player> players = Model.LeagueStatistics.GetAllPlayers(teams);
+            foreach (var player in players)
+            {
+                Console.WriteLine($"Name of player : {player.Name}");
+            }
+
+        }
+
+        public static void PrintTeamWithLeastLooses(IEnumerable<Team> teams,int teamsNumber)
+        {
+            IEnumerable<Team> topTeams = Model.LeagueStatistics.GetTopTeamsWithLeastLoses(teams, teamsNumber);
+            foreach (var team in topTeams)
+            {
+                Console.WriteLine($"Name of team : {team.Name}, number of looses : {team.Losts}");
+            }
+
+        }
+
+        public static void PrintTeamsWithPlayersWithoutGoals(IEnumerable<Team> teams)
+        {
+            IEnumerable<Team> teamsWithPlayersWithoutGoals = Model.LeagueStatistics.GetTeamsWithPlayersWithoutGoals(teams);
+            foreach (var team in teamsWithPlayersWithoutGoals)
+            {
+                Console.WriteLine($"Name of team with players without goals : {team.Name}");
+            }
+
+        }
+        public static void PrintPlayersWithAtLeastXGoals(IEnumerable<Team> teams, int goals)
+        {
+            IEnumerable<Player> playersWithAtLeastXGoals = Model.LeagueStatistics.GetPlayersWithAtLeastXGoals(teams, goals);
+            foreach (var player in playersWithAtLeastXGoals)
+            {
+                Console.WriteLine($"Name of player: {player.Name}, numbers of goals: {player.Goals}");
+            }
+
+        }
+
+
     }
     }
 
