@@ -32,8 +32,11 @@ namespace Codecool.LeagueStatistics.Controllers
             PlayAllGames();
             Display.PrintAllTeamsSorted(league);
             Display.PrintTeamWithLongestName(league);
- //           Display.PrintAllPlayers(league);
-
+//            Display.PrintAllPlayers(league);
+            Display.PrintTeamWithLeastLooses(league,5);
+            Display.PrintTeamsWithPlayersWithoutGoals(league);
+            Display.PrintPlayersWithAtLeastXGoals(league, 10);
+            Display.PrintMostSuccessfullPlayerFromGivenDivision(league, Division.Central);
 
 
             // Call Display methods here
@@ -43,10 +46,11 @@ namespace Codecool.LeagueStatistics.Controllers
         /// </summary>
         public void PlayAllGames()
         {
-            for(int i = 0; i < League.Count; i++) { 
-                for(int j = 0; j < League.Count; j++)
+            foreach(var team1 in League) { 
+                foreach(var team2 in League)
                 {
-                    PlayMatch(League[i], League[j]);
+                    if(team1 != team2)
+                    PlayMatch(team1, team2);
 
                 }
             }
@@ -56,18 +60,19 @@ namespace Codecool.LeagueStatistics.Controllers
         /// </summary>
         public void PlayMatch(Team team1, Team team2)
         {
+
             int team1goals = ScoredGoals(team1);
             int team2goals = ScoredGoals(team2);
 
             if (team1goals > team2goals)
             {
                 team1.Wins++;
-                team2.Losts--;
+                team2.Losts++;
             }
             else if (team1goals < team2goals)
             {
                 team2.Wins++;
-                team1.Losts--;
+                team1.Losts++;
             }
             else
             {
@@ -92,9 +97,9 @@ namespace Codecool.LeagueStatistics.Controllers
 
             var chance = random.Next(1, 50);
             var scores = 0;
-            foreach(var player in team.Players)
+            foreach (var player in team.Players)
             {
-                if (player.SkillRate >=chance)
+                if (player.SkillRate >= chance)
                 {
                     player.Goals++;
                     scores++;
