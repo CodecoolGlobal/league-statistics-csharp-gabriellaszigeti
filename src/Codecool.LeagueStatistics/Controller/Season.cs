@@ -95,7 +95,7 @@ namespace Codecool.LeagueStatistics.Controllers
         {
             var random = new Random(); ;
 
-            var chance = random.Next(1, 50);
+            var chance = random.Next(1, 100);
             var scores = 0;
             foreach (var player in team.Players)
             {

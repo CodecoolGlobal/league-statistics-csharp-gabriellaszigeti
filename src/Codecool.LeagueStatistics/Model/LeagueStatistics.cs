@@ -35,7 +35,9 @@ namespace Codecool.LeagueStatistics.Model
         /// <returns></returns>
         public static Team GetTeamWithTheLongestName(this IEnumerable<Team> teams) => teams
             .OrderByDescending(team => team.Name.Length)
+            .ThenBy(team => team.Players.Sum(player => player.Goals))
             .FirstOrDefault();
+
         /// <summary>
         ///     Gets top teams with least number of lost matches.
         ///     If the amount of lost matches is equal, next deciding parameter is team's current points value.
@@ -55,8 +57,9 @@ namespace Codecool.LeagueStatistics.Model
         /// <param name="teams"></param>
         /// <returns></returns>
         public static IEnumerable<Player> GetTopPlayersFromEachTeam(this IEnumerable<Team> teams)
-            => throw new NotImplementedException();
-
+            => teams
+            .Select(team => team.Players.OrderBy(player => player.Goals)
+            .FirstOrDefault());
         /// <summary>
         ///     Returns the division with greatest amount of points.
         ///     If there is more than one division with the same amount current points, then check the amounts of wins.

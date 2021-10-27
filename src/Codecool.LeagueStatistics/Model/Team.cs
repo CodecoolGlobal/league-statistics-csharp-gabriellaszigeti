@@ -39,5 +39,9 @@ namespace Codecool.LeagueStatistics.Model
         public Team()
         {
         }
+
+
+
+
     }
 }
